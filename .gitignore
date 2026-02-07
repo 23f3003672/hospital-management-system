@@ -1,0 +1,27 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.log
+*.sqlite3
+*.db
+
+# ===== Virtual Environments =====
+venv/
+.env/
+
+# ===== Flask =====
+instance/
+.flaskenv
+
+# ===== Celery / Redis =====
+celerybeat-schedule
+celerybeat.pid
+dump.rdb
+
+# ===== Node / Vue =====
+node_modules/
+dist/
+
+# ===== OS / Editor =====
+.DS_Store
+.vscode/
