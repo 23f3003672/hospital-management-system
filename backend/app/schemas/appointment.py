@@ -20,13 +20,11 @@ def appointment_basic_schema(appt):
 def serialize_appointment_history(appt):
     return {
         "id": appt.id,
-        "appointment_id": appt.id, # Fallback ID
+        "appointment_id": appt.id, 
         "date": appt.appointment_date.isoformat(),
-        # Enforces 12-hour format universally
         "time": appt.appointment_time.strftime("%I:%M %p"), 
         "status": appt.status,
         
-        # Consistent User Objects
         "doctor_name": appt.doctor.user.name if appt.doctor else "Unknown Doctor",
         "patient_name": appt.patient.user.name if appt.patient else "Unknown Patient",
         "doctor": {
@@ -39,8 +37,9 @@ def serialize_appointment_history(appt):
             "name": appt.patient.user.name
         } if appt.patient else None,
 
-        # Flat Treatment Data (No more nested objects!)
         "diagnosis": appt.treatment.diagnosis if appt.treatment else None,
         "prescription": appt.treatment.prescription if appt.treatment else None,
         "notes": appt.treatment.notes if appt.treatment else None,
+        "visit_type": appt.treatment.visit_type if appt.treatment else None,
+        "tests_done": appt.treatment.tests_done if appt.treatment else None,
     }

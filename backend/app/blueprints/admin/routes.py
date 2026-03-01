@@ -15,7 +15,6 @@ from app.tasks.reports import monthly_doctor_reports
 admin_bp = Blueprint("admin", __name__, url_prefix="/api/admin")
 SHORT_TTL = Config.SHORT_TTL
 
-# DASHBOARD COUNTS
 @admin_bp.route("/dashboard", methods=["GET"])
 @login_required
 @roles_required("admin")
