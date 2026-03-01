@@ -211,7 +211,6 @@ export default {
         } 
     },
 
-    //SEARCH & LOAD UTILS
     async clearDoctorSearch() { 
         this.doctorSearch.name = ""; 
         await this.searchDoctorsHandler(); 
