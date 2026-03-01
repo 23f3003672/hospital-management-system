@@ -1,0 +1,11 @@
+APPOINTMENT_STATUS_BOOKED = "BOOKED"
+APPOINTMENT_STATUS_COMPLETED = "COMPLETED"
+APPOINTMENT_STATUS_CANCELLED = "CANCELLED"
+
+ALL_APPOINTMENT_STATUSES = {APPOINTMENT_STATUS_COMPLETED,APPOINTMENT_STATUS_BOOKED,APPOINTMENT_STATUS_CANCELLED}
+
+ERROR_INVALID_STATUS = "Invalid Appointment Status"
+ERROR_STATUS_ALREADY_FINAL = ("This appointment is already completed or cancelled and cannot be modified.")
+ERROR_STATUS_TRANSITION_NOT_ALLOWED = ("This status change is not allowed.")
+ERROR_ONLY_DOCTOR_CAN_COMPLETE = ("Only a doctor or admin can mark an appointment as completed.")
+ERROR_ONLY_BOOKED_CAN_BE_CANCELLED = ("Only booked appointment can be cancelled.")
