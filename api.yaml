@@ -1,0 +1,232 @@
+openapi: 3.0.0
+info:
+  title: Hospital Management System API
+  description: Complete RESTful API documentation for the HMS backend, featuring Role-Based Access Control and asynchronous task processing.
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/api
+    description: Local development server
+
+security:
+  - cookieAuth: []
+
+paths:
+  /auth/login:
+    post:
+      summary: Authenticate user and create session
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successfully authenticated
+        '401':
+          description: Invalid credentials
+          
+  /auth/logout:
+    post:
+      summary: Terminate user session
+      tags: [Auth]
+      responses:
+        '200':
+          description: Successfully logged out
+
+  /patient/me:
+    get:
+      summary: Get current patient profile
+      tags: [Patient]
+      responses:
+        '200':
+          description: Patient profile data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientProfile'
+    put:
+      summary: Update patient profile
+      tags: [Patient]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientProfile'
+      responses:
+        '200':
+          description: Profile updated
+
+  /patient/doctors:
+    get:
+      summary: Browse available doctors
+      tags: [Patient]
+      parameters:
+        - name: department_id
+          in: query
+          schema:
+            type: integer
+        - name: search
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of doctors
+
+  /patient/doctors/{doctor_id}/availability:
+    get:
+      summary: Get 7-day availability for a specific doctor
+      tags: [Patient]
+      parameters:
+        - name: doctor_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Array of time slots (Available, Booked, Past)
+
+  /patient/appointments:
+    post:
+      summary: Book a new appointment
+      tags: [Patient]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingRequest'
+      responses:
+        '201':
+          description: Appointment booked successfully
+        '400':
+          description: Bad request or past date
+        '409':
+          description: Slot already booked (Race condition)
+
+  /patient/appointments/{appointment_id}/cancel:
+    post:
+      summary: Cancel an existing appointment
+      tags: [Patient]
+      parameters:
+        - name: appointment_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Appointment cancelled
+
+  /patient/export-csv:
+    post:
+      summary: Trigger background Celery task to export medical history
+      tags: [Patient]
+      responses:
+        '202':
+          description: Export job queued
+
+  /doctor/appointments/today:
+    get:
+      summary: Get doctor's appointments for the current day
+      tags: [Doctor]
+      responses:
+        '200':
+          description: List of today's appointments
+
+  /doctor/treatments:
+    post:
+      summary: Save diagnosis, prescription, and tests for an appointment
+      tags: [Doctor]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TreatmentRequest'
+      responses:
+        '201':
+          description: Treatment saved successfully
+
+  /admin/dashboard/stats:
+    get:
+      summary: Get hospital-wide statistics
+      tags: [Admin]
+      responses:
+        '200':
+          description: Aggregate statistics for admin charts
+
+  /admin/reports/monthly:
+    post:
+      summary: Trigger Celery task to email monthly reports to all doctors
+      tags: [Admin]
+      responses:
+        '202':
+          description: Report generation triggered
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session
+
+  schemas:
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    PatientProfile:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+
+    BookingRequest:
+      type: object
+      required: [doctor_id, date, time_slot]
+      properties:
+        doctor_id:
+          type: integer
+        date:
+          type: string
+          format: date
+          example: "2026-02-26"
+        time_slot:
+          type: string
+          example: "10:30"
+
+    TreatmentRequest:
+      type: object
+      required: [appointment_id, visit_type]
+      properties:
+        appointment_id:
+          type: integer
+        visit_type:
+          type: string
+          enum: [Online, In-person]
+        tests_done:
+          type: string
+          example: "ECG, Blood Test"
+        diagnosis:
+          type: string
+        prescription:
+          type: string
+        notes:
+          type: string
