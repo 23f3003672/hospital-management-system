@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request 
 from flask_security import login_required, roles_required
 from flask_security.utils import hash_password
-from sqlalchemy import func, or_ 
+from sqlalchemy import func
 from sqlalchemy.exc import IntegrityError
 from app.extensions import db 
 from app.models import Doctor, Patient, Appointment, User , Role, Department, Treatment

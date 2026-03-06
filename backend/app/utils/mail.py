@@ -2,15 +2,23 @@ import os
 from flask_mail import Message 
 from app.extensions import mail 
 
-def send_email(to, subject, body, attachment_path=None):
+def send_email(to, subject, body=None, html_content=None, attachment_path=None):
     try:
         msg = Message(subject, recipients=[to])
-        msg.body = body
+        
+        if body:
+            msg.body = body
+            
+        if html_content:
+            msg.html = html_content
         
         if attachment_path and os.path.exists(attachment_path):
             with open(attachment_path, 'rb') as fp:
                 filename = os.path.basename(attachment_path)
-                msg.attach(filename, "text/csv", fp.read())
+                
+                content_type = "application/pdf" if filename.endswith('.pdf') else "text/csv"
+                
+                msg.attach(filename, content_type, fp.read())
                 
         mail.send(msg)
         return True
