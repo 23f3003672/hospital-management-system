@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from app.models import DoctorAvailability, Appointment, Doctor
 from app.extensions import db
 from app.utils.constants import APPOINTMENT_STATUS_BOOKED, APPOINTMENT_STATUS_CANCELLED, APPOINTMENT_STATUS_COMPLETED
@@ -46,7 +46,7 @@ def reschedule_appointment(appointment_id, patient_id, new_date, new_time):
     _check_patient_overlap(patient_id, new_time, exclude_appt_id = appointment_id)
 
     if not _is_doctor_available(appt.doctor_id, new_date, new_time):
-        raise OutsideAvailabilityError("Doctor unavailable at new time")
+        raise OutsideAvailabilityError("Doctor unavailable at new time. Check some other time.")
     
     appt.appointment_date = new_date
     appt.appointment_time = new_time
@@ -90,7 +90,7 @@ def _check_doctor_slot_conflict(doctor_id, appointment_date, appointment_time):
     ).first()
 
     if conflict:
-        raise SlotAlreadyBookedError("Slot already booked")
+        raise SlotAlreadyBookedError("Slot already booked.Check some other slot")
     
 def _check_patient_overlap(patient_id, appointment_date, appointment_time, exclude_appt_id=None):
     query = Appointment.query.filter_by(

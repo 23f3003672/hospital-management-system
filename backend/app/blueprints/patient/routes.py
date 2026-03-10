@@ -81,7 +81,7 @@ def update_profile():
 def create_appointment():
     pid = get_current_patient_id()
     if not pid:
-        return jsonify({"error":"Patient profile not found.Please contact admin."}), 404
+        return jsonify({"error":"Patient profile not found.Please contact HMS admin."}), 404
     
     data = request.get_json() or {}
     doctor_id = data.get("doctor_id")
@@ -166,7 +166,7 @@ def upcoming_appointments():
             "time": a.appointment_time.strftime("%I:%M %p"), 
             
             "doctor_name": a.doctor.user.name if a.doctor and a.doctor.user else "Unknown",
-            "department_name": a.doctor.department.name if a.doctor and a.doctor.department else "General"
+            "department_name": a.doctor.department.name if a.doctor and a.doctor.department else "General Medicine"
         })
 
     return jsonify(result), 200
@@ -240,7 +240,7 @@ def get_doctors():
             "id": d.id,
             "name": d.user.name,
             "email": d.user.email,
-            "department_name": d.department.name if d.department else "Unassigned",
+            "department_name": d.department.name if d.department else "General Medicine",
             "qualification": d.qualification or "MBBS",
             "experience": d.experience or 0
         })

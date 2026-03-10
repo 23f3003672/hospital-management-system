@@ -67,7 +67,7 @@ export default {
                             <p class="text-muted mb-1">{{ doctor.qualification }}</p>
                             
                             <p class="text-muted mb-1">
-                                {{ doctor.department ? doctor.department.name : (doctor.department_name || 'General') }} Department
+                                {{ doctor.department ? doctor.department.name : (doctor.department_name || 'General Medicine') }} Department
                             </p>
                             
                             <p class="fw-bold mt-3">

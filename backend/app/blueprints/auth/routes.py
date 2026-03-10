@@ -25,15 +25,15 @@ def login():
         return jsonify({"message": "Invalid credentials"}), 401
     
     if not user.active:
-        return jsonify({"message": "Accoun is disabled.Kindly contact Hospital administration."}), 403
+        return jsonify({"message": "Accoun is disabled.Kindly contact HMS administration."}), 403
     
     if user.has_role("doctor"):
         if user.doctor and not user.doctor.is_active:
-            return jsonify({"message":"Account is blacklisted. Contact Hospital Administration."}), 403
+            return jsonify({"message":"Account is blacklisted. Contact HMS Administration."}), 403
         
     if user.has_role("patient"):
         if user.patient and not user.patient.is_active:
-            return jsonify({"message":"Account is blacklisted. Contact Hospital Administration."}), 403
+            return jsonify({"message":"Account is blacklisted. Contact HMS Administration."}), 403
         
     login_user(user)
     token = user.get_auth_token()

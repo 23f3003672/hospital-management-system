@@ -20,12 +20,12 @@ def export_patient_csv(self, export_job_id):
         "Hello,\n\n"
         "Please find your medical history CSV export attached to this email.\n\n"
         "Regards,\n"
-        "HMS"
+        "HMS Administration"
     )
     
     send_email(
         to=user.email, 
-        subject="Your Medical CSV is Ready", 
+        subject="Your Medical CSV Report is Ready", 
         body=body_text, 
         attachment_path=file_path
     )

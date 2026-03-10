@@ -30,7 +30,7 @@ export default {
                 this.department = deptRes;
                 this.doctors = docsRes;
             } catch (err) {
-                this.error = "Failed to load department details";
+                this.error = "Failed to load Department Details";
                 console.error(err);
             } finally {
                 this.loading = false;
@@ -96,25 +96,25 @@ export default {
 
             <div class="card border-dark rounded-0">
                 <div class="card-header bg-white fw-bold">
-                    Doctors' list
+                    Doctor List
                 </div>
                 <div class="card-body p-0">
                     <div v-if="doctors.length === 0" class="p-3 text-muted">
-                        No doctors found in this department.
+                        No doctors found for this department.
                     </div>
 
                     <div v-else class="list-group list-group-flush">
                         <div v-for="doc in doctors" :key="doc.id" class="list-group-item d-flex justify-content-between align-items-center py-3">
                             <div>
                                 <h6 class="mb-0 fw-bold">Dr. {{ doc.name }}</h6>
-                                <small class="text-muted">{{ doc.qualification }} • {{ doc.experience }} years exp</small>
+                                <small class="text-muted">{{ doc.qualification }} - {{ doc.experience }} years experience</small>
                             </div>
                             <div class="d-flex gap-2">
                                 <button class="btn btn-outline-primary btn-sm" @click="checkAvailability(doc.id)">
-                                    check availability
+                                    Check Availability
                                 </button>
                                 <button class="btn btn-outline-secondary btn-sm" @click="viewDoctorDetails(doc.id)">
-                                    view details
+                                    View Details
                                 </button>
                             </div>
                         </div>

@@ -9,7 +9,7 @@ from app.utils.constants import APPOINTMENT_STATUS_BOOKED, APPOINTMENT_STATUS_CO
 def seed_admin():
     admin_role = Role.query.filter_by(name="admin").first()
     if not admin_role:
-        admin_role = Role(name="admin", description="Administrator account of the Hospital Management System")
+        admin_role = Role(name="admin", description="Administrator account of HMS")
         db.session.add(admin_role)
         db.session.commit()
 
@@ -17,7 +17,7 @@ def seed_admin():
     admin_user = User.query.filter_by(email=admin_email).first()
 
     if not admin_user:
-        admin_user =User(name = "Admin - Hospital Management System", email = admin_email, password = hash_password("admin@123"), fs_uniquifier=str(uuid4()), active = True)
+        admin_user =User(name = "Admin - HMS", email = admin_email, password = hash_password("admin@123"), fs_uniquifier=str(uuid4()), active = True)
 
         admin_user.roles.append(admin_role)
         db.session.add(admin_user)
@@ -45,7 +45,7 @@ def seed_departments():
 def seed_doctors():
     doctor_role = Role.query.filter_by(name="doctor").first()
     if not doctor_role:
-        doctor_role = Role(name="doctor", description="The Doctor is a medical professional who manages assigned patient appointments and provides treatment through the system. Doctors can view their schedules, update availability, complete or cancel appointments, and record diagnosis, prescriptions, and medical notes for each consultation. They have access only to their own patients’ records, ensuring secure and role-based medical data management.")
+        doctor_role = Role(name="doctor", description="The Doctor is a medical professional who manages assigned patient appointments and provides treatment through the system. Doctors can view their schedules, update availability, complete or cancel appointments, and record diagnosis, prescriptions, and medical notes for each consultation.")
         db.session.add(doctor_role)
         db.session.commit()
 

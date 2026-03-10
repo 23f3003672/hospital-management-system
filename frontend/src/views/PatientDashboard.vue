@@ -87,8 +87,8 @@ import {
     <div class="container mt-4 mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
             <div>
-                <h3 class="mb-0">Welcome, {{ user ? user.name: 'Patient' }}</h3>
-                <span class="text-muted small">Manage your Health Journey</span>
+                <h3 class="mb-0">Welcome, {{ user ? user.name: 'Patient' }}</h3><br>
+                <span class="text-muted small">Manage your Health Journey! Book an appointment with India's top Medical Experts, across the country.</span>
             </div>
 
             <div class="text-end">
@@ -104,7 +104,7 @@ import {
 
         <div class="card mb-4 dashboard-card" v-if="!loading">
             <div class="card-header bg-white fw-bold">
-                Upcoming Appointments
+                Your Upcoming Appointments
             </div>
             <div class="card-body p-0">
                 <div v-if="upcomingAppointments.length === 0" class="p-3 text-muted text-center">
@@ -116,7 +116,7 @@ import {
                         <tr>
                             <th>Sr No.</th>
                             <th>Doctor</th>
-                            <th>Dept</th>
+                            <th>Department</th>
                             <th>Date & Time</th>
                             <th class="text-end">Action</th>
                         </tr>
@@ -142,7 +142,7 @@ import {
             </div>
 
             <div class="card-body">
-                <div v-if="departments.length === 0" class="text-muted">No departments available.</div>
+                <div v-if="departments.length === 0" class="text-muted">No Departments Available.Report to the Hospital Administration at admin@hms.com</div>
 
                 <div class="row g-3">
                     <div class="col-md-4" v-for="dept in departments" :key="dept.id">

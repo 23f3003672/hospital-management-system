@@ -123,7 +123,7 @@ export default {
     try {
       if (this.isEditing) {
         await updateDoctor(this.editingId, this.doctorForm);
-        this.formMessage = "Doctor updated successfully!";
+        this.formMessage = "Doctor Details updated successfully!";
       } else {
         if(!this.doctorForm.password) throw new Error("Password required");
         await addDoctor(this.doctorForm);
@@ -186,11 +186,11 @@ export default {
                 name: this.patientForm.name,
                 email: this.patientForm.email
             });
-            alert("Patient Updated Successfully!");
+            alert("Patient Details Updated Successfully!");
             this.showEditPatient = false;
             this.searchPatientsHandler();
         } catch(e) {
-            alert(e.message || "Update failed");
+            alert(e.message || "Failed to Update the Details");
         }
     },
     async togglePatientActive(p) { 
@@ -373,7 +373,7 @@ export default {
           </div>
 
           <div class="col-12">
-            <label class="small fw-bold"> Description </label>
+            <label class="small fw-bold"> Description(Optional) </label>
             <textarea class="form-control" v-model="doctorForm.description" rows="2"></textarea>
           </div>
         </div>
@@ -389,7 +389,7 @@ export default {
 
       <div class="card-body p-0">
         <div class="p-2 border-bottom bg-light input-group input-group-sm" style="max-width: 400px;">
-          <input type="text" class="form-control" placeholder="Search doctor..." v-model="doctorSearch.name" @keyup.enter="searchDoctorsHandler">
+          <input type="text" class="form-control" placeholder="Search Doctor..." v-model="doctorSearch.name" @keyup.enter="searchDoctorsHandler">
           <button class="btn btn-outline-secondary" @click="searchDoctorsHandler">Search</button>
           <button class="btn btn-danger" v-if="doctorSearch.name" @click="clearDoctorSearch">X</button>
         </div>
@@ -442,7 +442,7 @@ export default {
 
       <div class="card-body p-0">
         <div class="p-2 border-bottom bg-light input-group input-group-sm" style="max-width: 400px;">
-          <input type="text" class="form-control" placeholder="Search patient..." v-model="patientSearch.name" @keyup.enter="searchPatientsHandler">
+          <input type="text" class="form-control" placeholder="Search Patient..." v-model="patientSearch.name" @keyup.enter="searchPatientsHandler">
           <button class="btn btn-outline-secondary" @click="searchPatientsHandler">Search</button>
           <button class="btn btn-danger" v-if="patientSearch.name" @click="clearPatientSearch">X</button>
         </div>
@@ -481,7 +481,7 @@ export default {
                         <td>{{ appt.patient.name }}</td>
                         <td>{{ appt.doctor.name }}</td>
                         <td>{{ appt.status }}</td>
-                        <td><button class="btn btn-sm btn-outline-primary px-3 rounded-pill" @click="$router.push({name:'AdminPatientHistory', params:{patientId:appt.patient.id}})">view</button></td>
+                        <td><button class="btn btn-sm btn-outline-primary px-3 rounded-pill" @click="$router.push({name:'AdminPatientHistory', params:{patientId:appt.patient.id}})">View</button></td>
                     </tr>
                 </tbody>
             </table>

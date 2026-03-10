@@ -43,7 +43,7 @@ export default {
             this.generateWeek();
         } catch (err) {
             console.error(err);
-            this.error = "Failed to load schedule.";
+            this.error = "Failed to load Doctor Schedule.";
         } finally {
             this.loading = false;
         }

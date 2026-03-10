@@ -5,3 +5,5 @@ app = create_app()
 app.app_context().push()
 
 celery_app = celery 
+
+import celery_beat

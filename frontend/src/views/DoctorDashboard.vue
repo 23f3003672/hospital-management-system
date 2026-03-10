@@ -38,7 +38,7 @@ export default {
 
                 this.todayAppointments = dayRes.appointments || [];
                 
-                const todayStr = new Date().toLocaleDateString('en-CA'); // Gets local YYYY-MM-DD
+                const todayStr = new Date().toLocaleDateString('en-CA'); 
                 this.appointments = (weekRes.appointments || []).filter(appt => appt.date !== todayStr);
 
                 const patientsMap = new Map();
@@ -82,7 +82,7 @@ export default {
             if (!confirm("Mark this appointment as completed?")) return;
             try {
                 await completeAppointment(apptId);
-                this.successMessage = "Appointment marked as completed.";
+                this.successMessage = "Appointment Completed.";
                 await this.loadDashboardData()
             } catch (err) {
                 alert(err.message || "Failed to mark the appointment complete");
@@ -93,10 +93,10 @@ export default {
             if (!confirm("Are you sure you want to cancel this appointment?")) return;
             try {
                 await cancelDoctorAppointment(apptId);
-                this.successMessage = "Appointment cancelled.";
+                this.successMessage = "Appointment cancelled. The slot is now available for Booking!";
                 await this.loadDashboardData()
             } catch (err) {
-                alert(err.message || "Failed to cancel");
+                alert(err.message || "Failed to cancel the Appointment");
             }
         },
 
@@ -155,7 +155,7 @@ export default {
                                 <td class="fw-bold text-primary">{{ appt.patient ? appt.patient.name : 'Unknown' }}</td>
                                 <td>
                                     <button class="btn btn-outline-primary btn-sm rounded-pill px-3" @click="goToTreatment(appt.id || appt.appointment_id)" :disabled="appt.status === 'CANCELLED'">
-                                        {{ appt.status === 'COMPLETED' ? 'View/Edit Rx' : 'Add Treatment' }}
+                                        {{ appt.status === 'COMPLETED' ? 'View/Edit Prescription' : 'Add Treatment' }}
                                     </button>
                                 </td>
                                 <td>
@@ -199,7 +199,7 @@ export default {
                                 <td>{{ appt.patient ? appt.patient.name : 'Unknown' }}</td>
                                 <td>
                                     <button class="btn btn-outline-primary btn-sm rounded-pill px-3" @click="goToTreatment(appt.id || appt.appointment_id)" :disabled="appt.status === 'CANCELLED'">
-                                        {{ appt.status === 'COMPLETED' ? 'View/Edit Rx' : 'Add Treatment' }}
+                                        {{ appt.status === 'COMPLETED' ? 'View/Edit Prescription' : 'Add Treatment' }}
                                     </button>
                                 </td>
                                 <td>

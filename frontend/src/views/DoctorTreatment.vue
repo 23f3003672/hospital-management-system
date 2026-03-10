@@ -65,7 +65,7 @@ export default {
 
         addMedicine() {
             if(!this.newMedicine.name || !this.newMedicine.dosage) {
-                alert("Enter name and dosage"); return;
+                alert("Enter Name and Dosage"); return;
             }
             this.medicinesList.push({ ...this.newMedicine });
             this.newMedicine = { name: "", dosage: "" };
@@ -91,7 +91,7 @@ export default {
                     tests_done: this.testsDone || ""
                 });
 
-                alert("Treatment saved!");
+                alert("Treatment saved successflly!");
                 this.$router.push("/doctor");
             } catch (err) {
                 alert(err.message);
@@ -119,9 +119,6 @@ export default {
             <div class="card mb-4 border-dark rounded-0">
                 <div class="card-body">
                     <h5 class="card-title">Patient: {{ appointment.patient ? appointment.patient.name : 'Unknown' }}</h5>
-                    <p class="mb-0 text-muted">
-                        Department: <strong>{{ doctor ? doctor.department : 'Loading...' }}</strong>
-                    </p>
                 </div>
             </div>
 
@@ -136,14 +133,14 @@ export default {
                         </div>
                         <div class="col-md-6">
                             <label class="form-label fw-bold">Tests Done</label>
-                            <input v-model="testsDone" type="text" class="form-control border-dark" placeholder="e.g. ECG">
+                            <input v-model="testsDone" type="text" class="form-control border-dark" placeholder="e.g. Blood Test">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-7">
                             <label class="form-label fw-bold">Diagnosis</label>
-                            <textarea v-model="diagnosis" class="form-control border-dark" rows="5" placeholder="Enter diagnosis..."></textarea>
+                            <textarea v-model="diagnosis" class="form-control border-dark" rows="5" placeholder="Enter Diagnosis..."></textarea>
                         </div>
                         <div class="col-md-5">
                             <label class="form-label fw-bold">Medicines</label>
@@ -169,7 +166,7 @@ export default {
 
                     <div class="text-end">
                         <button class="btn btn-success px-4" @click="saveTreatment" :disabled="saving">
-                            {{ saving ? 'Saving...' : 'save' }}
+                            {{ saving ? 'Saving...' : 'Save' }}
                         </button>
                     </div>
                 </div>

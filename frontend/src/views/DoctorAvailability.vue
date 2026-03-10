@@ -89,7 +89,7 @@ export default {
                         slots: selectedTimes
                     });
                 }
-                alert("Availability saved successfully!!");
+                alert("Availability Time Slots saved successfully!!");
                 this.$router.push("/doctor");
             } catch (err) {
                 alert("Error saving: " + (err.message || "Unknown error"));
@@ -113,8 +113,8 @@ export default {
         <div class="card border-dark rounded-0 p-4" v-if="!loading">
             <div class="row mb-2 fw-bold text-center bg-light border-bottom py-2">
                 <div class="col-md-2">Date</div>
-                <div class="col-md-5">Morning (08:00 - 12:00)</div>
-                <div class="col-md-5">Evening (16:00 - 21:00)</div>
+                <div class="col-md-5">Morning (08:00 AM - 12:00 PM)</div>
+                <div class="col-md-5">Evening (16:00 PM - 21:00 PM)</div>
             </div>
 
             <div v-for="(day, index)  in days" :key="index" class="row mb-4 align-items-center border-bottom pb-3">

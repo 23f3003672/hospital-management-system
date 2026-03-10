@@ -57,7 +57,7 @@ export default {
                         <th>Visit Type</th>
                         <th>Diagnosis</th>
                         <th>Prescription</th>
-                        <th>Tests Done</th>
+                        <th>Tests Recommended</th>
                         <th>Notes</th>
                     </tr>
                 </thead>

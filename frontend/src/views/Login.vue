@@ -31,7 +31,7 @@ export default {
                         name: this.name,
                         role: "patient",
                     });
-                    alert("Registration successful! Please log in.");
+                    alert("Registration successful! Kindly Log In.");
                     this.isRegister = false;
                 } else {
                     data = await loginUser({
@@ -66,7 +66,7 @@ export default {
             <p class="lead text-muted mb-4">Hospital Management System</p>
 
             <div v-if="!isRegister" class="text-muted">
-                <p class="mb-1 fw-medium" style="color: #334155;">Welcome to the central healthcare portal.</p>
+                <p class="mb-1 fw-medium" style="color: #334155;">Welcome to the Central Healthcare Portal.</p>
                 <p class="small">
                     Secure access for <strong class="brand-text">Admins</strong>, 
                     <strong class="brand-text">Doctors</strong>, and <strong class="brand-text">Patients</strong>. 
@@ -74,9 +74,9 @@ export default {
             </div>
 
             <div v-else class="text-muted">
-                <p class="mb-1 fw-medium" style="color: #334155;">Welcome to our healthcare family!</p>
+                <p class="mb-1 fw-medium" style="color: #334155;">Welcome to our Healthcare Family!</p>
                 <p class="small">
-                    New patients can register below to easily book appointments and view records.
+                    New patients can register below to easily book appointments with India's leading Medical Experts across cities and view their medical records.
                 </p>
             </div>
         </div>
@@ -92,12 +92,12 @@ export default {
                     <label class="form-label small fw-bold text-uppercase d-flex align-items-center gap-2" style="color: #64748b;">
                         <i class="bi bi-person-fill"></i> Full Name
                     </label>
-                    <input v-model="name" type="text" class="form-control form-control-lg fs-6 bg-light" placeholder="e.g. John Doe" required />
+                    <input v-model="name" type="text" class="form-control form-control-lg fs-6 bg-light" placeholder="e.g. Devansh Malhotra" required />
                 </div>
 
                 <div class="mb-4">
                     <label class="form-label small fw-bold text-uppercase d-flex align-items-center gap-2" style="color: #64748b;">
-                        <i class="bi bi-envelope-fill"></i> Email Address
+                        <i class="bi bi-envelope-fill"></i> Email ID
                     </label>
                     <input v-model="email" type="email" class="form-control form-control-lg fs-6 bg-light" placeholder="name@example.com" required />
                 </div>
@@ -106,7 +106,7 @@ export default {
                     <label class="form-label small fw-bold text-uppercase d-flex align-items-center gap-2" style="color: #64748b;">
                         <i class="bi bi-lock-fill"></i> Password
                     </label>
-                    <input v-model="password" type="password" class="form-control form-control-lg fs-6 bg-light" placeholder="••••••••" required />
+                    <input v-model="password" type="password" class="form-control form-control-lg fs-6 bg-light" placeholder="********" required />
                 </div>
 
                 <div v-if="error" class="alert alert-danger small py-2 d-flex align-items-center gap-2">
@@ -114,7 +114,7 @@ export default {
                 </div>
 
                 <button class="btn btn-primary btn-lg w-100 mt-2 fw-bold" :disabled="loading">
-                    {{ loading ? 'Processing...' : (isRegister ? 'Create Account' : 'Secure Login') }}
+                    {{ loading ? 'Processing...' : (isRegister ? 'Create Account' : 'Login') }}
                 </button>
             </form>
 

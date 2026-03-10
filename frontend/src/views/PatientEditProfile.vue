@@ -24,7 +24,7 @@ export default {
             this.form.phone = user.phone || "";
             this.form.address =  user.address || "";
         } catch (err) {
-            this.error = "Failed to load profile.";
+            this.error = "Failed to load your details.";
         } finally {
             this.loading = false;
         }
@@ -43,7 +43,7 @@ export default {
                 this.success = "Profile updated successfully!";
                 this.form.password = "";
             } catch (err) {
-                this.error = err.message || "Failed to update profile";
+                this.error = err.message || "Failed to update your profile";
             } finally {
                 this.saving = false;
             }
@@ -79,14 +79,14 @@ export default {
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-bold">City / Address</label>
-                                    <input v-model="form.address" type="text" class="form-control" placeholder="e.g. Chennai" />
+                                    <input v-model="form.address" type="text" class="form-control" placeholder="e.g. Bareilly" />
                                 </div>
                             </div>
 
                             <div class="mb-4">
                                 <label class="form-label fw-bold">New Password</label>
                                 <input v-model="form.password" type="password" class="form-control" placeholder="Leave Blank to keep the current password" />
-                                <div class="form-text">Min 6 characters.</div>
+                                <div class="form-text">Min 8 characters.</div>
                             </div>
 
                             <button class="btn btn-success w-100" :disabled="saving">{{ saving ? 'Saving...' : 'Update Profile' }}</button>
