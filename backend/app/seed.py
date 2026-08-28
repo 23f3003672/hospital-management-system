@@ -45,7 +45,7 @@ def seed_departments():
 def seed_doctors():
     doctor_role = Role.query.filter_by(name="doctor").first()
     if not doctor_role:
-        doctor_role = Role(name="doctor", description="The Doctor is a medical professional who manages assigned patient appointments and provides treatment through the system. Doctors can view their schedules, update availability, complete or cancel appointments, and record diagnosis, prescriptions, and medical notes for each consultation.")
+        doctor_role = Role(name="doctor", description="The Doctor manages assigned patient appointments and provides treatment. Doctors can view schedules, update availability, complete or cancel appointments, and record diagnosis and prescriptions.")
         db.session.add(doctor_role)
         db.session.commit()
 
@@ -130,7 +130,7 @@ def seed_doctors():
 def seed_patients():
     patient_role = Role.query.filter_by(name="patient").first()
     if not patient_role:
-        patient_role = Role(name="patient", description="The Patient is a user who can register on the system to book and manage medical appointments. Patients can search for doctors by specialization and availability, schedule or cancel appointments, and view their own appointment history along with diagnosis and treatment details provided by doctors.")
+        patient_role = Role(name="patient", description="The Patient can register to book and manage appointments. Patients can search for doctors by specialization, schedule or cancel appointments, and view their appointment history and diagnosis details.")
         db.session.add(patient_role)
         db.session.commit()
 
