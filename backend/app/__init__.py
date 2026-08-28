@@ -12,12 +12,18 @@ def create_app():
     init_extensions(app)
     register_blueprints(app)
 
+    import os
+    frontend_url = os.environ.get("FRONTEND_URL")
+    cors_origins = [
+        "http://localhost:8080",
+        "http://127.0.0.1:8080",
+        "http://172.24.78.93:8080"
+    ]
+    if frontend_url:
+        cors_origins.append(frontend_url)
+
     CORS(app, resources = {r"/api/*": {
-        "origins": [
-            "http://localhost:8080",
-            "http://127.0.0.1:8080",
-            "http://172.24.78.93:8080"
-        ]
+        "origins": cors_origins
     }},
     supports_credentials=True)
     

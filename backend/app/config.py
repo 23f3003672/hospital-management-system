@@ -10,7 +10,9 @@ class Config:
     SECURITY_PASSWORD_HASH = "bcrypt"
     SECURITY_PASSWORD_LENGTH_MIN = 8
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(BASE_DIR, "../hms.db")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL", "sqlite:///" + os.path.join(BASE_DIR, "../hms.db"))
+    if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     SECURITY_REGISTERABLE = False 
@@ -37,8 +39,8 @@ class Config:
     REDIS_PORT = 6379
     REDIS_DB = 0
 
-    CELERY_BROKER_URL = "redis://localhost:6379/0"
-    CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+    CELERY_BROKER_URL = os.environ.get("REDIS_URL", "redis://localhost:6379/0")
+    CELERY_RESULT_BACKEND = os.environ.get("REDIS_URL", "redis://localhost:6379/0")
     CELERY_ACCEPT_CONTENT = ["json"]
     CELERY_TASK_SERIALIZER = "json"
     TIMEZONE = "Asia/Kolkata"

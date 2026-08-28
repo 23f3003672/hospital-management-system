@@ -1,4 +1,4 @@
-const BASE_URL = "http://172.24.78.93:5000/api";
+const BASE_URL = process.env.VUE_APP_API_URL || "http://127.0.0.1:5000/api";
 
 /* Helper Function */
 export async function request(url, options = {}) {
