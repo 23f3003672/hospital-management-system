@@ -9,3 +9,4 @@ flask-mail
 passlib==1.7.4
 bcrypt==3.2.2
 gunicorn==21.2.0
+psycopg2-binary==2.9.9
